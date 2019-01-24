@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+class Main 
+{
+	
+    public static void main(String[] args) throws IOException 
+    {
+       BufferedReader ip=new BufferedReader(new InputStreamReader(System.in));
+       Scanner scan=new Scanner(System.in);
+        String t=ip.readLine();
+        int t1=Integer.parseInt(t);
+        ip.readLine();
+    	for (int x=0;x<t1;x++) 
+    	{
+    	        if(x>0)
+     	        {
+     	            System.out.println();
+     	        }
+    	    ArrayList<String>list1=new ArrayList<String>();
+    	    String s;
+    	    while(((s=ip.readLine())!=null)&&(!s.equals("")))
+    	    {
+                list1.add(s);
+    	    }
+    	    Collections.sort(list1);
+    	    for(int i=0;i<list1.size()-1;i++)
+    	    {
+    	        String temp=list1.get(i);
+    	        temp=temp.replaceAll(" ", "");
+    			char [] c=temp.toCharArray();
+    			Arrays.sort(c);
+    			temp=String.valueOf(c);
+    		    for(int j=i+1;j<=list1.size()-1;j++)
+    		    {
+    		       String temp1=list1.get(j);
+    	           temp1=temp1.replaceAll(" ", "");
+    	           char [] c1=temp1.toCharArray();
+    		    	Arrays.sort(c1);
+    		    	temp1=String.valueOf(c1);
+    		    	if(temp.equals(temp1))
+    		    	{
+    		    	    System.out.println(list1.get(i)+" = "+list1.get(j));
+    		    	}
+    		      }
+     	        }
+
+    	}
+    	
+    }
+}

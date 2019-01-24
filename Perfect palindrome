@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+class Main {
+	public static void main (String[] args) 
+	{
+		Scanner ip=new Scanner(System.in);
+		String t=ip.nextLine();
+		int t1 = Integer.parseInt(t);
+		int c=1;
+		while(t1-->0)
+		{
+		   String s;
+		   s=ip.nextLine();
+		   s=s.replaceAll("\\W","");
+		   StringBuilder b=new StringBuilder();
+		   b.append(s);
+		   b=b.reverse();
+		   String d=b.toString(); 
+		   System.out.println("Case #"+c+":");
+		  if(d.equals(s))
+        {
+            double ans=Math.sqrt(d.length());
+            System.out.println(Math.round(ans));
+        }
+        else
+        {
+         System.out.println("No magic :(");   
+        }
+        c++;
+		}
+   }
+}

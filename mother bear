@@ -1,0 +1,36 @@
+
+import java.io.*;
+import java.util.*;
+
+class Main 
+{
+	public static void main (String[] args) throws IOException 
+	{
+	 Scanner scan = new Scanner(System.in);
+	 while(scan.hasNext())
+	 {
+        String input = scan.nextLine();
+        if(input.equals("DONE"))
+        {
+            break;
+        }
+        input= input.replaceAll("\\W", "");
+        input=input.toLowerCase();
+        StringBuilder rev=new StringBuilder();
+        StringBuilder nrml=new StringBuilder();
+        nrml.append(input);
+        rev.append(input);
+        rev=rev.reverse();
+        String s1=nrml.toString();
+        String s2=rev.toString();
+        if(s1.equals(s2))
+        {
+            System.out.println("You won't be eaten!");
+        }
+        else
+        {
+         System.out.println("Uh oh..");   
+        }
+	 }
+	}
+}

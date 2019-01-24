@@ -1,0 +1,80 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+class Main {
+	public static void main (String[] args) 
+	{
+		Scanner ip=new Scanner(System.in);
+		while(ip.hasNextInt())
+		{
+		   int pages=ip.nextInt();
+		   int sheet=pages/4;
+		   
+		   if(pages%4!=0)
+		        sheet+=1;
+            if(pages==0)
+		        break;
+	        System.out.println("Printing order for "+pages+" pages:");
+	        if(pages==1)
+	            System.out.println("Sheet 1, front: Blank, 1");
+            int a=1,b=pages;
+            if(pages%4==0)
+            {
+               for(int i=1;i<=sheet;i++)
+               {
+                   
+                   System.out.println("Sheet "+i+", front: "+b+", "+a);
+                   a++;b--;
+                   System.out.println("Sheet "+i+", back : "+a+", "+b);
+                   a++;b--;
+               }
+            }
+		    if(pages%4==3)
+            {
+               System.out.println("Sheet 1, front: Blank, "+a);
+               a++;
+               System.out.println("Sheet 1, back : "+a+", "+b);
+               a++;b--;
+               for(int i=2;i<=sheet;i++)
+               {
+               System.out.println("Sheet "+i+", front: "+b+", "+a);
+               a++;b--;
+               System.out.println("Sheet "+i+", back : "+a+", "+b);
+               a++;b--;
+               }
+            }
+            if(pages%4==2)
+            {
+                System.out.println("Sheet 1, front: Blank, "+a);
+                a++;
+                System.out.println("Sheet 1, back : "+a+", Blank");
+                a++;
+                for(int i=2;i<=sheet;i++)
+               {
+               System.out.println("Sheet "+i+", front: "+b+", "+a);
+               a++;b--;
+               System.out.println("Sheet "+i+", back : "+a+", "+b);
+               a++;b--;
+               }
+            }
+            if(pages%4==1&&pages>1)
+            {
+                System.out.println("Sheet 1, front: Blank, "+a);
+                a++;
+                System.out.println("Sheet 1, back : "+a+", Blank");
+                a++;
+                System.out.println("Sheet 2, front: Blank, "+a);
+                a++;
+                System.out.println("Sheet 2, back : "+a+", "+b);
+                a++;b--;
+                for(int i=3;i<=sheet;i++)
+               {
+               System.out.println("Sheet "+i+", front: "+b+", "+a);
+               a++;b--;
+               System.out.println("Sheet "+i+", back : "+a+", "+b);
+               a++;b--;
+               }                
+            }
+	}
+   }
+}

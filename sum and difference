@@ -1,0 +1,23 @@
+/*package whatever //do not write package name here */
+
+import java.io.*;
+import java.util.*;
+class Main {
+	public static void main (String[] args)
+	{
+	 Scanner ip=new Scanner(System.in);
+	 int t=ip.nextInt();
+	 while(t-->0)
+	 {
+	     int n1=ip.nextInt(),n2=ip.nextInt(),u=0,v=0;
+	     if(n1<n2||(n1%2==0&&n2%2!=0) || (n1%2!=0&&n2%2==0))
+	     System.out.println("impossible");
+	     else
+	     {
+	         u=(n1+n2)/2;
+	         v=n1-u;
+	         System.out.println(u+" "+v);
+	     }
+	 }
+	}
+}

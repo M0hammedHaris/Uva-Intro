@@ -1,0 +1,65 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+       
+        Scanner ip = new Scanner (System.in);
+        String s;
+        while (ip.hasNext) {
+            s=ip.nextLine();
+            boolean home = false;
+            StringBuilder cur = new StringBuilder();
+            LinkedList<StringBuilder> list = new LinkedList<StringBuilder>();
+            char[] c = s.toCharArray();
+            for (int i = 0; i < s.length(); i++) 
+            {
+                if (c[i] == '[') 
+                {
+                    if (home) 
+                    {
+                        list.addFirst(cur);
+                    } 
+                    else 
+                    {
+                        list.addLast(cur);
+                    }
+                    cur = new StringBuilder();
+                    home = true;
+                } 
+                else if (c[i] == ']') 
+                {
+                    if (home) 
+                    {
+                        list.addFirst(cur);
+                    } 
+                    else 
+                    {
+                        list.addLast(cur);
+                    }
+                    cur = new StringBuilder();
+                    home = false;
+                } 
+                else 
+                {
+                    cur.append(c[i]);
+                }
+            }
+            if (home) 
+            {
+                list.addFirst(cur);
+            } 
+            else 
+            {
+                list.addLast(cur);
+            }
+            StringBuilder res = new StringBuilder();
+            for (StringBuilder sb : list) 
+            {
+                res.append(sb);
+            }
+            System.out.println(res);
+        }
+    }
+}

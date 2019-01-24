@@ -1,0 +1,68 @@
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Main {
+ 
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    PrintWriter out = new PrintWriter(System.out);
+ 
+    while (sc.hasNextInt()) {
+      int L = sc.nextInt();
+      if (L == 0)
+        break;
+      L--;
+ 
+      String ans = "+x";
+      for (int i = 0; i < L; i++) {
+        String input = sc.next();
+        if (!input.equals("No"))
+          if (ans.equals("+x")) {
+            ans = input.toString();
+          } else if (ans.equals("-x")) {
+            if (input.charAt(0) == '-') {
+              ans = "+" + input.charAt(1);
+            } else {
+              ans = "-" + input.charAt(1);
+            }
+          } else if (ans.equals("+y")) {
+            if (input.equals("+y")) {
+              ans = "-x";
+            } else if (input.equals("-y")) {
+              ans = "+x";
+            } else {
+              ans = "+y";
+            }
+          } else if (ans.equals("-y")) {
+            if (input.equals("+y")) {
+              ans = "+x";
+            } else if (input.equals("-y")) {
+              ans = "-x";
+            } else {
+              ans = "-y";
+            }
+          } else if (ans.equals("+z")) {
+            if (input.equals("+z")) {
+              ans = "-x";
+            } else if (input.equals("-z")) {
+              ans = "+x";
+            } else {
+              ans = "+z";
+            }
+          } else if (ans.equals("-z")) {
+            if (input.equals("+z")) {
+              ans = "+x";
+            } else if (input.equals("-z")) {
+              ans = "-x";
+            } else {
+              ans = "-z";
+            }
+          }
+      }
+      out.println(ans);
+    }
+ 
+    out.close();
+    sc.close();
+  }
+}

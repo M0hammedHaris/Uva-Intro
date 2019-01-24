@@ -1,0 +1,24 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+
+	public static void main(String[] args){
+	    //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	    Scanner ip = new Scanner(System.in);
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        while (ip.hasNextInt()) {
+            list.add(ip.nextInt());
+            Collections.sort(list);
+            int size = list.size();
+            if (size % 2 == 0) {
+                size/=2;
+                System.out.println((list.get(size) + list.get(size - 1)) / 2);
+            } else {
+                size/=2;
+                System.out.println(list.get(size));
+            }
+        }
+	}
+	
+}

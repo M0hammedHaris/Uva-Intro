@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+class Main 
+{
+	public static void main (String[] args) throws IOException 
+	{
+	 Scanner ip = new Scanner(System.in);
+	 String t=ip.nextLine();
+	 int result = Integer.parseInt(t);	
+	 while(result>0)
+	 {
+	    int count=0;
+        String input = ip.nextLine();
+        StringBuilder rev=new StringBuilder();
+        StringBuilder nrml=new StringBuilder();
+        nrml.append(input);
+        rev.append(input);
+        rev=rev.reverse();
+        String s1=nrml.toString();
+        String s2=rev.toString();
+        int ans1= Integer.parseInt(s1);	
+        int ans2 = Integer.parseInt(s2);
+        long ans3=ans1+ans2;
+        if(ans1==ans2)
+        {
+             System.out.println(count+" "+ans1); 
+        }
+        else
+        {
+          while(true)
+          {
+            count++;
+            String temp=Long.toString(ans3);
+            StringBuilder temp1=new StringBuilder();
+            temp1.append(temp);
+            temp1=temp1.reverse();
+            String s3=temp1.toString();
+            long ans4= Long.parseLong(s3);	
+            long ans5 = Long.parseLong(temp);
+            if(ans4==ans5)
+            {
+              System.out.println(count+" "+ans5); 
+              break;
+            }
+            ans3=ans4+ans5;
+          }
+        }
+        result--;
+	 }
+	}
+}

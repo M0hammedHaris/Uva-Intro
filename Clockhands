@@ -1,0 +1,32 @@
+
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+import java.text.DecimalFormat;
+
+class Main {
+	public static void main (String[] args) {
+	  Scanner ip=new Scanner(System.in);
+	  while(true)
+	  {
+	      String t=ip.nextLine();
+	      if(t.equals("0:00"))
+	       {
+	          break;
+	       }
+	      int l=t.length();
+	      String m1=t.substring(l-2);
+	      String h1=t.substring(0,l-3);
+	      int m=Integer.parseInt(m1);
+	      int h=Integer.parseInt(h1);
+	       h = h * 5;
+          if (h < m) h = h + 60;
+          double ans = (h - m + m / 12.0) * 6;
+          ans = (ans > 180 ? 360 - ans : ans);
+          ans = (ans >= 0 ? ans : -ans);
+          double ans1=(Math.round(ans*10)/10.0);
+          System.out.println(ans1+"00");
+	  }
+	  
+	}
+}

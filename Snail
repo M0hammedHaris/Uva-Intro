@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+class Main
+{
+    public static void main (String[] args) 
+    {
+        double h,u,d,f;
+        Scanner ip=new Scanner(System.in);
+        while(ip.hasNext())
+        {
+            h=ip.nextDouble();
+            u=ip.nextDouble();
+            d=ip.nextDouble();
+            f=ip.nextDouble();
+            if(h==0)
+                break;
+            double fati=(u/100)*f;
+            int count=1;
+            double completed=0;
+            while(true)
+            {
+               completed=completed+u; 
+               if(completed>h)
+               {
+                   System.out.println("success on day "+count);
+                   break;               }
+               else if(completed<0)
+               {
+                   System.out.println("failure on day "+count);
+                   break;
+               }
+               completed=completed-d;
+               if(completed<0)
+               {
+                   System.out.println("failure on day "+count);
+                   break;
+               }
+               u=u-fati;
+               count++;
+               if(u<0)
+                u=0;
+            }
+            
+        }
+
+    }
+}
