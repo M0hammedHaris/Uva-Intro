@@ -1,54 +1,49 @@
+/*package whatever //do not write package name here */
 
 import java.io.*;
 
-
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s;
-        while ((s = br.reads()) != null) {
-            if (s.equals("#")) {
+    public static void main(String[] args) throws IOException {
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        StringBuilder sb = new StringBuilder("");
+        String m;
+        while (true) {
+            m= br.readLine();
+            char[] arr = m.toCharArray();
+            if ("#".equals(m)) {
                 break;
             }
-            boolean ada = false;
-            int[] arr = new int[s.length()];
-            for (int i = 0; i < s.length(); i++) {
-                arr[i] = s.charAt(i) - 'a';
-                System.out.println(arr[i]);
-            }
-            while (nextPermutation(arr)) {
-                ada = true;
-                for (int i = 0; i < arr.length; i++) {
-                    System.out.print((char) (arr[i] + 'a'));
+            int indexMin = -1, indexMax = -1;
+            for (int i = arr.length - 1; i > 0; i--) {
+                if (arr[i - 1] < arr[i]) {
+                    indexMin = i - 1;
+                    break;
                 }
-                System.out.println();
-                break;
             }
-            if (!ada) {
-                System.out.println("No Successor");
-            }
-        }
-    }
-
-    static boolean nextPermutation(int[] p) {
-        for (int a = p.length - 2; a >= 0; --a) {
-            if (p[a] < p[a + 1]) {
-                for (int b = p.length - 1;; --b) {
-                    if (p[b] > p[a]) {
-                        int t = p[a];
-                        p[a] = p[b];
-                        p[b] = t;
-                        for (++a, b = p.length - 1; a < b; ++a, --b) {
-                            t = p[a];
-                            p[a] = p[b];
-                            p[b] = t;
-                        }
-                        return true;
+            if (indexMin != -1) {
+                for (int i = arr.length - 1; i > -1; i--) {
+                    if (arr[i] > arr[indexMin]) {
+                        indexMax = i;
+                        break;
                     }
                 }
+                char temp;
+                temp = arr[indexMax];
+                arr[indexMax] = arr[indexMin];
+                arr[indexMin] = temp;
+
+                for (int i = indexMin + 1, j = arr.length - 1; i < j; i++, j--) {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+                sb.append(new String(arr)).append("\n");
+            } else {
+                sb.append("No Successor").append("\n");
             }
         }
-        return false;
+        System.out.print(sb);
     }
 }
