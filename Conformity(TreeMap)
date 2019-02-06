@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+class Main {
+	
+	public static void main (String [] args) throws Exception{
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		String s;
+		while (!(s=br.readLine()).equals("0")){
+			int n=Integer.parseInt(s);
+			TreeMap<String,Integer> map=new TreeMap<>();
+
+			for (int i=0;i<n;i++) {
+				StringTokenizer st=new StringTokenizer(br.readLine());
+				TreeSet<String> set=new TreeSet<>();
+				for (int j=0;j<5;j++)
+				set.add(st.nextToken());
+				
+				String key=set.toString();
+				map.put(key, map.getOrDefault(key,0)+1);
+			}
+			
+			int max=Collections.max(map.values());
+			System.out.println(map.values().stream().filter(i -> i == max).count()*max);
+		}
+	}
+
+}
