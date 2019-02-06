@@ -1,68 +1,50 @@
-import java.io.BufferedReader;  
-import java.io.IOException;  
-import java.io.InputStreamReader;  
-import java.io.PrintWriter; 
-import java.util.ArrayList;  
-import java.util.PriorityQueue;  
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
-public class Main 
-{  
- public static void main(String[] args) throws IOException 
- {  
-      BufferedReader in = new BufferedReader(new InputStreamReader(System.in));  
-      PrintWriter out = new PrintWriter(System.out);  
-      
-      String line = in.readLine();  
-      PriorityQueue<Node> q = new PriorityQueue<>();  
-      int[] counts = new int[3001]; 
-      
-      while(!line.equals("#"))
-      {  
-        ArrayList<String> s = getTokens(line);  
-        Node n = new Node();  
-        n.id = Integer.parseInt(s.get(1));  
-        n.v = Integer.parseInt(s.get(2));  
-        counts[n.id] = n.v;  
-        q.add(n);  
-        line = in.readLine(); 
-      }  
-      
-      int k = Integer.parseInt(in.readLine());  
-      for (int i = 0; i < k; i++) 
-      {  
-        Node min = q.poll();  
-        out.append(String.valueOf(min.id));  
-        out.append("\n");  
-        min.v+=counts[min.id];  
-        q.add(min);  
-      }  
-      out.flush();  
-    }  
-    
-    public static ArrayList<String> getTokens(String line)
-    {  
-      String[] arr = line.split(" ");  
-      ArrayList<String> list = new ArrayList<>();  
-      for (String s : arr)
-      {  
-        if(!s.isEmpty()) list.add(s);  
-      }  
-      return list;  
-    }  
-    
-    public static class Node implements Comparable<Node>
-    {  
-      int v ;  
-      int id;  
-      
-      @Override  
-      public int compareTo(Node o) 
-      {  
-        if(this.v < o.v)return -1;  
-        if(this.v > o.v)return 1;  
-        if(this.id< o.id)return -1;  
-        if(this.id>o.id)return 1;  
-        return 0;  
-      }  
-    }  
-  } 
+class Main {
+	
+	public static class Instruction implements Comparable<Instruction> {
+		private int id;
+		private int timeout;
+		private int nextServiceTime;
+		
+		public Instruction (int id, int t) {
+			this.id=id;
+			this.timeout=t;
+			this.nextServiceTime=t;
+		}
+		
+		public void updateServiceTime () {
+			this.nextServiceTime+=timeout;
+		}
+		
+		public int compareTo (Instruction in) {
+			if (this.nextServiceTime!=in.nextServiceTime) return this.nextServiceTime-in.nextServiceTime;
+			return this.id-in.id;
+		}
+	}
+	
+	public static void main (String [] args) throws IOException {
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		PriorityQueue<Instruction> queue=new PriorityQueue<>();
+		String s;
+		while (!(s=br.readLine()).equals("#")) {
+			StringTokenizer st=new StringTokenizer(s);
+			st.nextToken(); 
+			queue.add(new Instruction(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken())));
+		}
+		int K=Integer.parseInt(br.readLine());
+		StringBuilder sb=new StringBuilder();
+		for (int i=0;i<K;i++) {
+			Instruction in=queue.poll();
+			in.updateServiceTime();
+			queue.offer(in);
+			sb.append(in.id);
+			sb.append('\n');
+		}
+		System.out.print(sb.toString());
+	}
+}
